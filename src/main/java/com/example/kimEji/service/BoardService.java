@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class BoardService {
@@ -34,5 +37,21 @@ public class BoardService {
         board.update(updateDto.getAge(),updateDto.getPhone());
 
         return id;
+    }
+
+    @Transactional
+    public Long delete(Long id){
+        Board board = boardRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+
+        boardRepository.delete(board);
+        return id;
+    }
+
+    @Transactional
+    public List<Board> getBoardList() {
+        List<Board> boards = boardRepository.findAllDesc();
+
+        return boards;
     }
 }

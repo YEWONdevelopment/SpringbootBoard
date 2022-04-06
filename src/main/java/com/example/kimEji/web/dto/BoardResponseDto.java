@@ -1,6 +1,7 @@
 package com.example.kimEji.web.dto;
 
 import com.example.kimEji.domain.Board;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
